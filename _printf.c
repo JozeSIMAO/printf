@@ -33,6 +33,9 @@ int _printf(const char *format, ...)
 				case 'i':
 					chars_printed += print_int(va_arg(list, int));
 					break;
+				case 'b':
+					chars_printed += print_binary(va_arg(list, unsigned int));
+					break;
 				default:
 					_putchar('%');
 					_putchar(format[i]);
