@@ -26,8 +26,8 @@ int _printf(const char *format, ...)
 				case 's':
 					chars_printed += _puts(va_arg(list, char*));
 					break;
-				case '%':
-					chars_printed += _putchar('%');
+				case 'S':
+					chars_printed += print_custom_string(va_arg(list, char *));
 					break;
 				case 'd':
 				case 'i':
@@ -35,6 +35,21 @@ int _printf(const char *format, ...)
 					break;
 				case 'b':
 					chars_printed += print_binary(va_arg(list, unsigned int));
+					break;
+				case 'u':
+					chars_printed += print_unsigned(va_arg(list, unsigned int));
+					break;
+				case 'o':
+					chars_printed += print_octal(va_arg(list, unsigned int));
+					break;
+				case 'x':
+					chars_printed += print_hex(va_arg(list, unsigned int), 0);
+					break;
+				case 'X':
+					chars_printed += print_hex(va_arg(list, unsigned int), 1);
+					break;
+				case 'p':
+					chars_printed += print_pointer(va_arg(list, void *));
 					break;
 				default:
 					_putchar('%');
@@ -45,7 +60,10 @@ int _printf(const char *format, ...)
 		else
 		{
 			chars_printed += _putchar(format[i]);
-		} i++;
-	} va_end(list);
+		}
+		i++;
+	}
+	va_end(list);
+
 	return (chars_printed);
 }
